@@ -15,22 +15,21 @@ import java.util.List;
  * */
 
 public class Example {
+
     // https://login.sendpulse.com/settings/#api
-    private static String userId = "5e14191f99644a02c3fd04bde7c43751"; // **insert ID**
-    private static String secret = "3e91766291ab769c4dac7adbe50cb7b5"; // **insert secret**
+    private static String userId = ""; // **insert ID**
+    private static String secret = ""; // **insert secret**
 
     public static void main(String[] args) {
         Sendpulse sendpulse = new Sendpulse(userId, secret);
 
         //PersonalData p1 = new PersonalData("bruna@inovags.com", "Sistemas de Informação", "Belo Horizonte");
         //PersonalData p2 = new PersonalData("d2021001809@unifei.edu.br", "Administração", "São Paulo");
-       // PersonalData p3 = new PersonalData("suporte@inovags.com", "Engenharia", "Belo Horizonte");
         //PersonalData p4 = new PersonalData("rodrigo@inovags.com", "Sistemas de Informação", "Belo Horizonte");
 
         //List<PersonalData> list = new ArrayList<>();
         //list.add(p1);
         //list.add(p2);
-        //list.add(p3);
         //list.add(p4);
 
         /* Creating and adding data by CSV */
@@ -48,7 +47,7 @@ public class Example {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         /* Creating a Mailing List */
         /* Get list_id by JSON format */
         JSONObject addressBook = new JSONObject(sendpulse.
@@ -117,17 +116,17 @@ public class Example {
         /* Creating and sending a campaign */
         /**
          * Sending email via SendPulse Email Service
-         * @param senderName - Estágio Online
-         * @param senderEmail - e-mail do Estágio Online
-         * @param subject - título do e-mail
-         * @param templateId - id do template a ser utilizado
-         * @param listId - id da lista de contatos criada anteriormente
-         * @param name - nome da campanha
-         * @param attachments - anexos
+         * @param senderName
+         * @param senderEmail
+         * @param subject
+         * @param templateId
+         * @param listId
+         * @param name
+         * @param attachments
          */
         // **insert a sender e-mail**
         // **insert a template id**
-        System.out.println(sendpulse.createCampaign("Bruna Delmouro", "brunadelmouro@gmail.com", "Test 26/12 - Email Service SendPulse with AddressesBook", 22285, Integer.parseInt(listId), "Final test", ""));
+        System.out.println(sendpulse.createCampaign("Bruna Delmouro", "", "Test - Email Service SendPulse with AddressesBook", 22285, Integer.parseInt(listId), "Final test", ""));
         System.out.println("Campaign created!");
 
         System.out.println("----------------------------------------------------------------------------");
