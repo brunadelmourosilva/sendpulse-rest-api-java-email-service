@@ -17,8 +17,8 @@ import java.util.List;
 public class Example {
 
     // https://login.sendpulse.com/settings/#api
-    private static String userId = ""; // **insert ID**
-    private static String secret = ""; // **insert secret**
+    private static String userId = "730c093d2a1335bc027fbc508a8fa20e"; // **insert ID**
+    private static String secret = "cc3af0d755e97713c4df503aed1ef9fa"; // **insert secret**
 
     public static void main(String[] args) {
         Sendpulse sendpulse = new Sendpulse(userId, secret);
@@ -126,7 +126,7 @@ public class Example {
          */
         // **insert a sender e-mail**
         // **insert a template id**
-        System.out.println(sendpulse.createCampaign("Bruna Delmouro", "", "Test - Email Service SendPulse with AddressesBook", 22285, Integer.parseInt(listId), "Final test", ""));
+        System.out.println(sendpulse.createCampaign("Estágio Online", "", "", 22285, Integer.parseInt(listId), "", ""));
         System.out.println("Campaign created!");
 
         System.out.println("----------------------------------------------------------------------------");
