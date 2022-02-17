@@ -7,7 +7,9 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /*
@@ -50,11 +52,14 @@ public class Example {
 
         /* Creating a Mailing List */
         /* Get list_id by JSON format */
+        SimpleDateFormat sdf = new SimpleDateFormat("dd_MMM_yyyy_hh:mm:ss_a");
+        Date now = new Date();
+
         JSONObject addressBook = new JSONObject(sendpulse.
-                createAddressBook("lista-contatos-java[" + java.time.LocalDateTime.now() + "]"));
+                createAddressBook("contatos[" + sdf.format(now) + "]"));
 
         String listId = addressBook.toString(2).substring(19, 25); //get a specific id
-        System.out.println("bookName: " + "lista-contatos-java[" + java.time.LocalDateTime.now() + "]");
+        System.out.println("bookName: " + "contatos[" + sdf.format(now) + "]");
         System.out.println("listId: " + listId + "\n");
 
 
@@ -126,7 +131,7 @@ public class Example {
          */
         // **insert a sender e-mail**
         // **insert a template id**
-        System.out.println(sendpulse.createCampaign("Estágio Online", "", "", 22285, Integer.parseInt(listId), "", ""));
+        System.out.println(sendpulse.createCampaign("Estágio Online", "brunadelmouro@gmail.com", "", 22285, Integer.parseInt(listId), "campanha", ""));
         System.out.println("Campaign created!");
 
         System.out.println("----------------------------------------------------------------------------");

@@ -7,31 +7,23 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /*
- * Bruna Delmouro
+ * Estágio Online
  * */
 
 public class ExampleJobs {
 
     // https://login.sendpulse.com/settings/#api
-    private static String userId = "730c093d2a1335bc027fbc508a8fa20e"; // **insert ID**
-    private static String secret = "cc3af0d755e97713c4df503aed1ef9fa"; // **insert secret**
+    private static String userId = "2be7d28fc637441d8358c940a8df871b"; // **insert ID**
+    private static String secret = "0cf8894c2a35732ce8ee9b7b336f5a94"; // **insert secret**
 
     public static void main(String[] args) {
         Sendpulse sendpulse = new Sendpulse(userId, secret);
-
-        //PersonalData p1 = new PersonalData("bruna@inovags.com", "Sistemas de Informação", "Belo Horizonte");
-        //PersonalData p2 = new PersonalData("d2021001809@unifei.edu.br", "Administração", "São Paulo");
-        //PersonalData p4 = new PersonalData("rodrigo@inovags.com", "Sistemas de Informação", "Belo Horizonte");
-
-        //List<PersonalData> list = new ArrayList<>();
-        //list.add(p1);
-        //list.add(p2);
-        //list.add(p4);
-
 
         /* Creating and adding data by CSV */
         List<PersonalData> listCSV = new ArrayList<>();
@@ -51,11 +43,15 @@ public class ExampleJobs {
 
         /* Creating a Mailing List */
         /* Get list_id by JSON format */
-        JSONObject addressBook = new JSONObject(sendpulse.
-                createAddressBook("lista-contatos-java[" + java.time.LocalDateTime.now() + "]"));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd_MMM_yyyy_hh:mm:ss_a");
+        Date now = new Date();
 
-        String listId = addressBook.toString(2).substring(19, 25); //get a specific id
-        System.out.println("bookName: " + "lista-contatos-java[" + java.time.LocalDateTime.now() + "]");
+        JSONObject addressBook = new JSONObject(sendpulse.
+                createAddressBook("contatos[" + sdf.format(now) + "]"));
+
+
+        String listId = addressBook.toString(2).substring(19, 27); //get a specific id
+        System.out.println("bookName: " + "contatos[" + sdf.format(now) + "]");
         System.out.println("listId: " + listId + "\n");
 
 
@@ -109,9 +105,8 @@ public class ExampleJobs {
 
         System.out.println("----------------------------------------------------------------------------");
 
-        /* -------------------------------------------------------------------------------- */
-
-        //templateId: 22285
+        //templateId: 1652785
+        //bookId: 89395591
         /* Creating and sending a campaign */
         /**
          * Sending email via SendPulse Email Service
@@ -123,12 +118,19 @@ public class ExampleJobs {
          * @param name
          * @param attachments
          */
-        // **insert a sender e-mail**
-        // **insert a template id**
-        System.out.println(sendpulse.createCampaign("Estágio Online", "", "", 22285, Integer.parseInt(listId), "", ""));
-        System.out.println("Campaign created!");
+        System.out.println(
+                sendpulse.createCampaign("Estágio Online",
+                        "contato@estagioonline.com",
+                        "Teste com conta da estágio online",
+                        1652785,
+                        Integer.parseInt(listId),
+                        "Teste via código",
+                        "")
+        );
 
+        System.out.println("Campaign created!");
         System.out.println("----------------------------------------------------------------------------");
         //System.out.println(sendpulse.listCampaigns(0, 0));
+
     }
 }
