@@ -1,8 +1,16 @@
 package com.sendpulse;
 
+import com.sendpulse.restapi.JsonTools;
 import com.sendpulse.restapi.PersonalData;
 import com.sendpulse.restapi.Sendpulse;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /*
@@ -19,61 +27,61 @@ public class ExampleJobs {
         Sendpulse sendpulse = new Sendpulse(userId, secret);
 
         /* Creating and adding data by CSV */
-//        List<PersonalData> listCSV = new ArrayList<>();
-//
-//        String line = "";
-//        String splitBy = ",";
-//        try {
-//            BufferedReader br = new BufferedReader(new FileReader("CSVTest.csv"));
-//            while ((line = br.readLine()) != null) {
-//                String[] data = line.split(splitBy);
-//
-//                listCSV.add(new PersonalData(data[0], data[1], data[2])); //email, cidade and curso
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        /* Creating a Mailing List */
-//        /* Get list_id by JSON format */
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd_MMM_yyyy_hh:mm:ss_a");
-//        Date now = new Date();
-//
-//        JSONObject addressBook = new JSONObject(sendpulse.
-//                createAddressBook("contatos[" + sdf.format(now) + "]"));
-//
-//
-//        String listId = addressBook.toString(2).substring(19, 27); //get a specific id
-//        System.out.println("bookName: " + "contatos[" + sdf.format(now) + "]");
-//        System.out.println("listId: " + listId + "\n");
-//
-//
-//        /* Creating a JSON format to add the emails and variables */
-//        //StringBuilder listByJson = listEmailsJsonFormat(listCSV);
-//
-//        JsonTools jt = new JsonTools();
-//        String json = null;
-//        try {
-//            json = jt.jsonToString("vagas1498.json");
-//
-//            /* Add Emails to a Mailing List */
-//            System.out.println(sendpulse.addEmails(Integer.parseInt(listId), json));
-//            System.out.println("E-mails list added!");
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        System.out.println("----------------------------------------------------------------------------");
-//
-//
-//
-//        /* Add a time sleep between mailing list and campaign */
-//        try {
-//            Thread.sleep(60000); //1 minute
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        List<PersonalData> listCSV = new ArrayList<>();
+
+        String line = "";
+        String splitBy = ",";
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("CSVTest.csv"));
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(splitBy);
+
+                listCSV.add(new PersonalData(data[0], data[1], data[2])); //email, cidade and curso
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        /* Creating a Mailing List */
+        /* Get list_id by JSON format */
+        SimpleDateFormat sdf = new SimpleDateFormat("dd_MMM_yyyy_hh:mm:ss_a");
+        Date now = new Date();
+
+        JSONObject addressBook = new JSONObject(sendpulse.
+                createAddressBook("contatos[" + sdf.format(now) + "]"));
+
+
+        String listId = addressBook.toString(2).substring(19, 27); //get a specific id
+        System.out.println("bookName: " + "contatos[" + sdf.format(now) + "]");
+        System.out.println("listId: " + listId + "\n");
+
+
+        /* Creating a JSON format to add the emails and variables */
+        //StringBuilder listByJson = listEmailsJsonFormat(listCSV);
+
+        JsonTools jt = new JsonTools();
+        String json = null;
+        try {
+            json = jt.jsonToString("vagas1498.json");
+
+            /* Add Emails to a Mailing List */
+            System.out.println(sendpulse.addEmails(Integer.parseInt(listId), json));
+            System.out.println("E-mails list added!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("----------------------------------------------------------------------------");
+
+
+
+        /* Add a time sleep between mailing list and campaign */
+        try {
+            Thread.sleep(300000); //5 minutes
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
         System.out.println("----------------------------------------------------------------------------");
