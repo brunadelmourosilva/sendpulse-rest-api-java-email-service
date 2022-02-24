@@ -1,0 +1,38 @@
+[
+    {
+        "email": "bruna@inovags.com",
+        "variables": {
+            "vaga1": "https://br.talent.com/redirect?id=70b2d09b8112&source=estagioonline2_premium&utm_source=partner&utm_medium=estagioonline2_premium&puid=gdd9fddg3aee3dee3aec3deg3de7gade9dd83def8ddf9dde8ed3cdddfddbbed2bdd7ced3acdefbde3ce4&cg=talent",
+            "vaga2": "https://br.talent.com/redirect?id=e8340236d8ab&source=estagioonline2_premium&utm_source=partner&utm_medium=estagioonline2_premium&puid=gadbfdd83ded3dec3deg3dee3dedgdda9adc3de87adfbadeded37dddgddbbed2bdd7ced3acdefbde3ce4&cg=talent",
+            "vaga3": "https://br.talent.com/redirect?id=45e08b9c9c8b&source=estagioonline2_premium&utm_source=partner&utm_medium=estagioonline2_premium&puid=gddcfddb3aeb3deg3de83aee3de7gadd9dd73aedbdd8gade9ed3edddfddbbed2bdd7ced3acdefbde3ce4&cg=talent",
+            "nome": "Bruna InovaGS",
+            "titulo1": "ENFERMEIRO PLENO - São Paulo e Belo Horizonte",
+            "titulo2": "ENFERMEIRO SENIOR - SÃO PAULO",
+            "titulo3": "COORDENADOR MÉDICO DO TRABALHO - ID: 21000ATU"
+        }
+    },
+    {
+        "email": "cesar@inovags.com",
+        "variables": {
+            "vaga1": "https://br.talent.com/redirect?id=3897de178435&source=estagioonline2_premium&utm_source=partner&utm_medium=estagioonline2_premium&puid=gdddfdd83de73de93aec3aeb3defgdd99dd83decaddd8ddbfed3edddfddbbed2bdd7ced3acdefbde3ce4&cg=talent",
+            "vaga2": "https://br.talent.com/redirect?id=3ca852b74558&source=estagioonline2_premium&utm_source=partner&utm_medium=estagioonline2_premium&puid=gdddfadd3aef3de83deb3dee3aeegdd99ddc3debfddbddd89ed3fdddfddbbed2bdd7ced3acdefbde3ce4&cg=talent",
+            "vaga3": "https://br.talent.com/redirect?id=070514af1c1b&source=estagioonline2_premium&utm_source=partner&utm_medium=estagioonline2_premium&puid=gddgfdd93deg3deb3def3dec3aefgada9ddf3aeddddfgadeged39dddfddbbed2bdd7ced3acdefbde3ce4&cg=talent",
+            "nome": "César Ferreira",
+            "titulo1": "Desenvolvedor(a) - Sistemas de Informação",
+            "titulo2": "Mobile Developer (Flutter)",
+            "titulo3": "Java Engineer"
+        }
+    },
+    {
+        "email": "rodrigo@inovags.com",
+        "variables": {
+            "vaga1": "https://br.talent.com/redirect?id=83893db4d97d&source=estagioonline2_premium&utm_source=partner&utm_medium=estagioonline2_premium&puid=gdd8fddd3de83de73ded3aec3aeegddc9adc3de77dd9aadcded3bdddfddbbed2bdd7ced3acdefbde3ce4&cg=talent",
+            "vaga2": "https://br.talent.com/redirect?id=83893db4d97d&source=estagioonline_premium&utm_source=partner&utm_medium=estagioonline_premium&puid=gdd8fddd3de83de73ded3aec3aeegddc9adc3de7fdd98adc7ed3addddddbbed2bddaced3acdefbde3ce4&cg=talent",
+            "vaga3": "https://br.talent.com/redirect?id=bee8f6e0f1d7&source=estagioonline2_premium&utm_source=partner&utm_medium=estagioonline2_premium&puid=gadefadb3aeb3de83aea3dea3aebgddg9ada3deffadcadd98ed3adddgddabed2bddfced3acdefbde3ce4&cg=talent",
+            "nome": "Rodrigo Alves",
+            "titulo1": "Gestão de Recursos Humanos",
+            "titulo2": "Gestão de Recursos Humanos",
+            "titulo3": "Vaga para Analista/Revisor - Direito Civil"
+        }
+    }
+]
