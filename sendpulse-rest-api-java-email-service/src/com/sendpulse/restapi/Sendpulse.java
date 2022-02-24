@@ -413,7 +413,7 @@ public class Sendpulse implements SendpulseInterface{
       * @param String name
       * @param String attachments
       */
-     public Map<String, Object> createCampaign( String senderName, String senderEmail, String subject, int templateId, int bookId, String name, String attachments){
+     public Map<String, Object> createCampaign( String senderName, String senderEmail, String subject, int templateId, int bookId, String campaignName, String attachments){
     	 if( senderName.length()==0 || senderEmail.length()==0 || subject.length()==0 || templateId<=0 || bookId<=0 )
 			  return this.handleError( "Not all data.");
 
@@ -434,7 +434,7 @@ public class Sendpulse implements SendpulseInterface{
 		 data.put("list_id", bookId);
 		 data.put("template_id", templateId);
 
-		 if(name.length()>0) data.put("name", name);
+		 if(campaignName.length()>0) data.put("name", campaignName);
 
 		 Map<String, Object> result = null;
 
