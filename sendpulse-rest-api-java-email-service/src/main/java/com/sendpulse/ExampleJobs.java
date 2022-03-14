@@ -72,18 +72,28 @@ public class ExampleJobs {
 
         System.out.println("Lista de templates: ");
 
-        Map<String, Object> templates = sendpulse.getTemplatesFromUser("me");
+        /* Return a list of all user templates */
+        JSONObject templates = new JSONObject(sendpulse.getTemplatesFromUser("me"));
 
-        try {
-            String result = getTemplates(templates.toString());
-            System.out.println(result.indexOf("preview="));
-            System.out.println(result.indexOf("real_id="));
-            System.out.println(result.indexOf("name="));
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String result = templates.toString();
 
+        //for (int i = 0; i < result.lastIndexOf("}"); i++) {
+            String[] infos;
+
+            infos = (result.substring(result.indexOf("\"preview\":"))).split(",");
+            System.out.println(infos[0]);
+
+            infos = (result.substring(result.indexOf("\"real_id\":"))).split(",");
+            System.out.println(infos[0]);
+
+            infos = (result.substring(result.indexOf("\"name\":"))).split(",");
+            System.out.println(infos[0]);
+        //}
+
+
+
+        System.out.println("\n\n" + templates);
         System.out.println("----------------------------------------------------------------------------");
 
         //templateId: 1656009
@@ -120,16 +130,14 @@ public class ExampleJobs {
 
     public static String getTemplates(String listTemplates) throws IOException {
 
-        //ObjectMapper mapper = new ObjectMapper();
-        //Template template = mapper.readValue(listTemplates, Template.class);
-        Map<String,String> myMap;
+        String myString;
 
         ObjectMapper objectMapper = new ObjectMapper();
-        myMap = objectMapper.readValue(listTemplates.replace("{data=[", ""), HashMap.class);
+        myString = objectMapper.readValue(listTemplates.replace("{data=[", ""), String.class);
 
-        System.out.println("Map is: "+myMap);
+        System.out.println("String is: " + myString);
 
-        return myMap.toString();
+        return myString.toString();
 
 
     }
