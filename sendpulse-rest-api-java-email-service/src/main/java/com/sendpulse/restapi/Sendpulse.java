@@ -335,6 +335,18 @@ public class Sendpulse implements SendpulseInterface{
   		 } catch (IOException e) {}
          return this.handleResult(result);
      }
+
+	public Map<String, Object> getTemplatesFromUser(String owner){
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("owner", owner);
+
+		Map<String, Object> result = null;
+		try {
+			result = this.sendRequest("templates", "GET", data,true );
+		} catch (IOException e) {}
+		return this.handleResult(result);
+	}
+
      /**
       * Calculate cost of the campaign based on address book
       *
@@ -402,6 +414,7 @@ public class Sendpulse implements SendpulseInterface{
  		 } catch (IOException e) {}
          return this.handleResult(result);
      }
+
      /**
       * Create new campaign
       *

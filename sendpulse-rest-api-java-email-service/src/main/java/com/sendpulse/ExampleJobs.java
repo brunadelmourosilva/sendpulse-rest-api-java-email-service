@@ -1,12 +1,14 @@
 package com.sendpulse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sendpulse.restapi.JsonTools;
 import com.sendpulse.restapi.Sendpulse;
+import com.sendpulse.restapi.Template;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 
 /*
  * Estágio Online
@@ -44,7 +46,7 @@ public class ExampleJobs {
             json = jt.jsonToString("vagas1498.json");
 
             /* Add Emails to a Mailing List */
-            System.out.println(sendpulse.addEmails(Integer.parseInt(listId), json));
+            //System.out.println(sendpulse.addEmails(Integer.parseInt(listId), json));
             System.out.println("E-mails list added!");
 
         } catch (Exception e) {
@@ -54,39 +56,81 @@ public class ExampleJobs {
         System.out.println("----------------------------------------------------------------------------");
 
         /* Add a time sleep between mailing list and campaign */
-        try {
-            Thread.sleep(300000); //5 minutes
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(300000); //5 minutes
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
         System.out.println("----------------------------------------------------------------------------");
 
         System.out.print("Título do e-mail: ");
         String emailTitle = SC.nextLine();
 
-        //adicionar template - listar templates
-
         System.out.print("Nome da campanha: ");
         String campaignName = SC.nextLine();
+
+        System.out.println("Lista de templates: ");
+
+        Map<String, Object> templates = sendpulse.getTemplatesFromUser("me");
+
+        try {
+            String result = getTemplates(templates.toString());
+            System.out.println(result.indexOf("preview="));
+            System.out.println(result.indexOf("real_id="));
+            System.out.println(result.indexOf("name="));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         System.out.println("----------------------------------------------------------------------------");
 
         //templateId: 1656009
         //bookId: 89398056
         /* Creating and sending a campaign */
-        System.out.println(
-                sendpulse.createCampaign("Estágio Online",
-                        "contato@estagioonline.com",
-                        emailTitle,
-                        1656009,
-                        Integer.parseInt(listId),
-                        campaignName,
-                        "")
-        );
+        int res = 0;
 
-        System.out.println("Campaign created!");
+        do {
+            System.out.println("Deseja enviar a campanha?[1-Sim/2-Não]");
+            res = SC.nextInt();
+
+            if(res == 1){
+//                System.out.println(
+//                        sendpulse.createCampaign("Estágio Online",
+//                                "contato@estagioonline.com",
+//                                emailTitle,
+//                                1656009,
+//                                Integer.parseInt(listId),
+//                                campaignName,
+//                                "")
+//                );
+                System.out.println("Campaign created!");
+                break;
+            } else {
+                continue;
+            }
+
+        }while(res != 1);
+
+
         System.out.println("----------------------------------------------------------------------------");
+
+    }
+
+    public static String getTemplates(String listTemplates) throws IOException {
+
+        //ObjectMapper mapper = new ObjectMapper();
+        //Template template = mapper.readValue(listTemplates, Template.class);
+        Map<String,String> myMap;
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        myMap = objectMapper.readValue(listTemplates.replace("{data=[", ""), HashMap.class);
+
+        System.out.println("Map is: "+myMap);
+
+        return myMap.toString();
+
 
     }
 }
