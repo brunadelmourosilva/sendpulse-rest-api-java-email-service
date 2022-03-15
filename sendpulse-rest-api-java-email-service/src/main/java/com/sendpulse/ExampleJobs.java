@@ -1,12 +1,10 @@
 package com.sendpulse;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sendpulse.restapi.JsonTools;
 import com.sendpulse.restapi.Sendpulse;
-import com.sendpulse.restapi.Template;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -75,26 +73,53 @@ public class ExampleJobs {
         /* Return a list of all user templates */
         JSONObject templates = new JSONObject(sendpulse.getTemplatesFromUser("me"));
 
+        System.out.println(templates);
+        /* Convert a JSONObject to ArrayList */
+        List<Object> result = jsonToArrayList(templates);
 
-        String result = templates.toString();
+//        for (int i = 0; i < result.size(); i++) {
+//            System.out.println(result.get(i));
+//        }
+        System.out.println("----------------------------------------------------------------------------");
 
-        //for (int i = 0; i < result.lastIndexOf("}"); i++) {
+        for (int i = 0; i < result.size(); i++) {
             String[] infos;
 
-            infos = (result.substring(result.indexOf("\"preview\":"))).split(",");
+            infos = (result.get(i).toString().substring( result
+                                                        .get(i)
+                                                        .toString()
+                                                        .lastIndexOf("\"preview\":")))
+                                                        .split(",");
+
             System.out.println(infos[0]);
 
-            infos = (result.substring(result.indexOf("\"real_id\":"))).split(",");
+
+            infos = (result.get(i).toString().substring( result
+                                                        .get(i)
+                                                        .toString()
+                                                        .lastIndexOf("\"real_id\":")))
+                                                        .split(",");
+
             System.out.println(infos[0]);
 
-            infos = (result.substring(result.indexOf("\"name\":"))).split(",");
-            System.out.println(infos[0]);
-        //}
+
+           infos = (result.get(i).toString().substring( result
+                                                       .get(i)
+                                                       .toString()
+                                                       .lastIndexOf("\"name\":")))
+                                                       .split(",");
+
+           System.out.println(infos[0]);
+            System.out.println("----------------------------");
+        }
 
 
-
-        System.out.println("\n\n" + templates);
         System.out.println("----------------------------------------------------------------------------");
+        System.out.print("Escolha o template, copie o Id e cole no console: ");
+
+
+        System.out.println("----------------------------------------------------------------------------");
+
 
         //templateId: 1656009
         //bookId: 89398056
@@ -105,7 +130,7 @@ public class ExampleJobs {
             System.out.println("Deseja enviar a campanha?[1-Sim/2-Não]");
             res = SC.nextInt();
 
-            if(res == 1){
+            if (res == 1) {
 //                System.out.println(
 //                        sendpulse.createCampaign("Estágio Online",
 //                                "contato@estagioonline.com",
@@ -121,24 +146,35 @@ public class ExampleJobs {
                 continue;
             }
 
-        }while(res != 1);
+        } while (res != 1);
 
 
         System.out.println("----------------------------------------------------------------------------");
 
     }
 
-    public static String getTemplates(String listTemplates) throws IOException {
+    public static List<Object> jsonToArrayList(JSONObject jsonObject) {
 
-        String myString;
+        //System.out.println("Json object: " + jsonObject);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        myString = objectMapper.readValue(listTemplates.replace("{data=[", ""), String.class);
+        JSONArray jsonArray = jsonObject.getJSONArray("data");
 
-        System.out.println("String is: " + myString);
+        ArrayList<Object> listdata = new ArrayList<>();
 
-        return myString.toString();
+        if (jsonArray != null) {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                listdata.add(jsonArray.get(i));
+            }
+        }
 
+        //for (int i = 0; i < listdata.size(); i++) {
+        //    System.out.println(listdata.get(i));
+        //    System.out.println();
+        //}
 
+        return listdata;
     }
+
+
 }
+/* https://processing.github.io/processing-javadocs/core/processing/data/JSONObject.html */
