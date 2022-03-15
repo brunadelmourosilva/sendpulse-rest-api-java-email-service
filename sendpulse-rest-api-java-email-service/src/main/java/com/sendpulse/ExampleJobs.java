@@ -44,7 +44,7 @@ public class ExampleJobs {
             json = jt.jsonToString("vagas1498.json");
 
             /* Add Emails to a Mailing List */
-            //System.out.println(sendpulse.addEmails(Integer.parseInt(listId), json));
+            System.out.println(sendpulse.addEmails(Integer.parseInt(listId), json));
             System.out.println("E-mails list added!");
 
         } catch (Exception e) {
@@ -54,11 +54,11 @@ public class ExampleJobs {
         System.out.println("----------------------------------------------------------------------------");
 
         /* Add a time sleep between mailing list and campaign */
-//        try {
-//            Thread.sleep(300000); //5 minutes
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            Thread.sleep(300000); //5 minutes
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         System.out.println("----------------------------------------------------------------------------");
 
@@ -73,53 +73,39 @@ public class ExampleJobs {
         /* Return a list of all user templates */
         JSONObject templates = new JSONObject(sendpulse.getTemplatesFromUser("me"));
 
-        System.out.println(templates);
         /* Convert a JSONObject to ArrayList */
         List<Object> result = jsonToArrayList(templates);
 
-//        for (int i = 0; i < result.size(); i++) {
-//            System.out.println(result.get(i));
-//        }
         System.out.println("----------------------------------------------------------------------------");
 
         for (int i = 0; i < result.size(); i++) {
             String[] infos;
 
-            infos = (result.get(i).toString().substring( result
-                                                        .get(i)
-                                                        .toString()
-                                                        .lastIndexOf("\"preview\":")))
-                                                        .split(",");
-
+            infos = extractInfo(result, "\"preview\":", i);
             System.out.println(infos[0]);
 
-
-            infos = (result.get(i).toString().substring( result
-                                                        .get(i)
-                                                        .toString()
-                                                        .lastIndexOf("\"real_id\":")))
-                                                        .split(",");
-
+            infos = extractInfo(result, "\"real_id\":", i);
             System.out.println(infos[0]);
 
-
-           infos = (result.get(i).toString().substring( result
-                                                       .get(i)
-                                                       .toString()
-                                                       .lastIndexOf("\"name\":")))
-                                                       .split(",");
-
+           infos = extractInfo(result, "\"name\":", i);
            System.out.println(infos[0]);
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             System.out.println("----------------------------");
         }
 
 
         System.out.println("----------------------------------------------------------------------------");
-        System.out.print("Escolha o template, copie o Id e cole no console: ");
 
+        System.out.print("\nEscolha o template, copie o Id e cole no console: ");
+        Integer idTemplate = SC.nextInt();
 
         System.out.println("----------------------------------------------------------------------------");
-
 
         //templateId: 1656009
         //bookId: 89398056
@@ -131,15 +117,16 @@ public class ExampleJobs {
             res = SC.nextInt();
 
             if (res == 1) {
-//                System.out.println(
-//                        sendpulse.createCampaign("Estágio Online",
-//                                "contato@estagioonline.com",
-//                                emailTitle,
-//                                1656009,
-//                                Integer.parseInt(listId),
-//                                campaignName,
-//                                "")
-//                );
+                System.out.println(
+                        sendpulse.createCampaign(
+                                "Estágio Online",
+                                "contato@estagioonline.com",
+                                emailTitle,
+                                idTemplate,
+                                Integer.parseInt(listId),
+                                campaignName,
+                                "")
+                );
                 System.out.println("Campaign created!");
                 break;
             } else {
@@ -154,9 +141,6 @@ public class ExampleJobs {
     }
 
     public static List<Object> jsonToArrayList(JSONObject jsonObject) {
-
-        //System.out.println("Json object: " + jsonObject);
-
         JSONArray jsonArray = jsonObject.getJSONArray("data");
 
         ArrayList<Object> listdata = new ArrayList<>();
@@ -166,13 +150,17 @@ public class ExampleJobs {
                 listdata.add(jsonArray.get(i));
             }
         }
-
-        //for (int i = 0; i < listdata.size(); i++) {
-        //    System.out.println(listdata.get(i));
-        //    System.out.println();
-        //}
-
         return listdata;
+    }
+
+    public static String[] extractInfo(List<Object> result, String info, int index){
+        String array[] = (result.get(index).toString().substring( result
+                                                .get(index)
+                                                .toString()
+                                                .lastIndexOf(info)))
+                                                .split(",");
+
+        return array;
     }
 
 
